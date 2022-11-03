@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>View Shopping Cart</title>
+</head>
+<body>
+<h2>All Shopping Cart Items</h2>
+
+<table>
+	<tr>
+		<th>Actions</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Price</th>
+		<th>Link</th>
+	</tr>
+	<tr th:each="sl:${shoppinglist}" th:object="${sl}">
+		<td>
+			<a th:href="@{/delete/{id}(id=*{id})}">Delete</a>
+			<a th:href="@{/edit/{id}(id=*{id})}">Modify</a>
+		</td>
+		<td th:text="*{name}"></td>
+		<td th:text="*{description}"></td>
+		<td th:text="*{price}" th:style="${sl.price > 100 ? 'color: red' : 'color: green'}"></td>
+		<td><a th:href="*{link}">Item Link</a></td>
+	</tr>
+</table>
+
+<a th:href="@{/add}">Add Item</a>
+
+</body>
+</html>
